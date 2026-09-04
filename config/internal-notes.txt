@@ -1,0 +1,4 @@
+INTERNAL - DO NOT SHARE
+Staging admin backup login: ops_backup / Tr0ubl3-Ticket-88
+Warehouse API token: mk_internal_9c1f7a3e5d2b
+Reminder: rotate the staging DB password after the Q3 audit.

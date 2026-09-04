@@ -1,0 +1,70 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px;">
+  <div id="welcome-banner"></div>
+
+  <h1 style="font-size:1.8rem;">My account</h1>
+
+  <% if (notice) { %><div class="alert alert-success"><%= notice %></div><% } %>
+
+  <div style="display:grid; grid-template-columns:1fr 1.4fr; gap:32px; margin-top:24px; align-items:start;">
+    <div class="card">
+      <h3 style="font-size:1.05rem;">Profile</h3>
+      <p class="muted">Signed in as <strong><%= user.display_name %></strong> (<%= user.username %>)</p>
+
+      <form action="/account/email" method="POST" style="margin-top:18px;">
+        <div class="field">
+          <label>Email address</label>
+          <input type="email" name="email" placeholder="you@example.com" required>
+        </div>
+        <button type="submit" class="btn-small">Update email</button>
+      </form>
+
+      <form action="/account/avatar" method="POST" enctype="multipart/form-data" style="margin-top:22px; border-top:1px solid var(--line); padding-top:18px;">
+        <div class="field">
+          <label>Profile photo</label>
+          <input type="file" name="avatar" accept="image/*" required>
+        </div>
+        <button type="submit" class="btn-small btn-outline">Upload photo</button>
+      </form>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1.05rem;">Order history</h3>
+      <% if (orders.length === 0) { %>
+        <p class="muted">You haven't placed any orders yet.</p>
+      <% } else { %>
+        <table>
+          <thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+          <% orders.forEach(o => { %>
+            <tr>
+              <td>#<%= o.id %></td>
+              <td><%= o.created_at.split(' ')[0] %></td>
+              <td>$<%= o.total.toFixed(2) %></td>
+              <td><span class="badge badge-<%= o.status %>"><%= o.status %></span></td>
+              <td><a href="/account/orders/<%= o.id %>">View</a></td>
+            </tr>
+          <% }) %>
+          </tbody>
+        </table>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Referral links look like /account#ref=SomeFriendName and greet the
+  // referring friend by name. The value is taken straight from the URL
+  // fragment and written into the page without escaping.
+  (function () {
+    var hash = window.location.hash;
+    var match = hash.match(/ref=([^&]+)/);
+    if (match) {
+      var name = decodeURIComponent(match[1]);
+      document.getElementById('welcome-banner').innerHTML =
+        '<div class="alert alert-info">Welcome, referred by ' + name + '!</div>';
+    }
+  })();
+</script>
+
+<%- include('partials/footer') %>

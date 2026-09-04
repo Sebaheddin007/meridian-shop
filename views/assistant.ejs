@@ -1,0 +1,72 @@
+<%- include('partials/header') %>
+
+<section class="container" style="padding-top:48px; padding-bottom:80px; max-width:640px;">
+  <h1 style="font-size:1.6rem;">Meridian shopping assistant</h1>
+
+  <p class="muted">
+    Ask about sizing, shipping, or products. It also reads recent reviews to answer product questions.
+  </p>
+
+  <div class="card">
+
+    <% if (error) { %>
+      <p style="margin-bottom:16px;">
+        <strong>Assistant:</strong>
+        <%= error %>
+      </p>
+    <% } %>
+
+    <div style="min-height:120px; margin-bottom:16px;">
+
+      <% history.forEach(h => { %>
+        <p style="margin:6px 0;">
+          <strong>
+            <%= h.role === 'user' ? 'You' : 'Assistant' %>:
+          </strong>
+
+          <%= h.text %>
+        </p>
+      <% }) %>
+
+    </div>
+
+    <form
+      action="/assistant"
+      method="POST"
+      style="display:flex; gap:10px;"
+      onsubmit="return disableAssistantSubmit(this)"
+    >
+
+      <input
+        type="text"
+        name="message"
+        placeholder="Ask something..."
+        autocomplete="off"
+        required
+      >
+
+      <button type="submit">
+        Send
+      </button>
+
+    </form>
+
+  </div>
+</section>
+
+<script>
+  function disableAssistantSubmit(form) {
+    const button = form.querySelector('button[type="submit"]');
+
+    if (button.disabled) {
+      return false;
+    }
+
+    button.disabled = true;
+    button.textContent = 'Sending...';
+
+    return true;
+  }
+</script>
+
+<%- include('partials/footer') %>

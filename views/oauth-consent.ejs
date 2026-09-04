@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<section class="form-page container-narrow">
+  <div class="card" style="text-align:center;">
+    <h1 style="font-size:1.4rem;">Authorize application</h1>
+    <p class="muted"><strong><%= client_id || 'Unknown app' %></strong> wants to sign you in with your MeridianID and access your basic profile.</p>
+    <p class="muted" style="font-size:0.8rem; word-break:break-all;">Redirect: <%= redirect_uri %></p>
+    <form action="/oauth/authorize" method="POST" style="margin-top:20px;">
+      <input type="hidden" name="client_id" value="<%= client_id %>">
+      <input type="hidden" name="redirect_uri" value="<%= redirect_uri %>">
+      <input type="hidden" name="state" value="<%= state %>">
+      <button type="submit" style="width:100%;">Allow</button>
+    </form>
+  </div>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,10 @@
+<%- include('partials/header') %>
+<section class="form-page container-narrow">
+  <div class="card">
+    <h1 style="font-size:1.4rem;">Save your cart</h1>
+    <p class="muted">Copy this code to restore your cart on another device.</p>
+    <textarea readonly rows="4" style="font-family:monospace; font-size:0.8rem;"><%= code %></textarea>
+    <a class="btn btn-small btn-outline" style="margin-top:14px;" href="/cart/import">Restore a saved cart →</a>
+  </div>
+</section>
+<%- include('partials/footer') %>

@@ -1,0 +1,23 @@
+{
+  "name": "meridian-shop",
+  "version": "1.0.0",
+  "description": "Meridian - outdoor & home goods store (intentionally vulnerable practice site)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node db/init.js"
+  },
+  "dependencies": {
+    "@google/genai": "^2.15.0",
+    "better-sqlite3": "^11.3.0",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "node-fetch": "^2.7.0",
+    "ws": "^8.18.0"
+  }
+}

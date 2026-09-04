@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+<section class="form-page container-narrow">
+  <div class="card">
+    <h1>Checkout</h1>
+    <form action="/checkout" method="POST">
+      <div class="field">
+        <label>Shipping address</label>
+        <textarea name="address" rows="3" required></textarea>
+      </div>
+      <button type="submit" style="width:100%;">Place order</button>
+    </form>
+  </div>
+</section>
+<%- include('partials/footer') %>

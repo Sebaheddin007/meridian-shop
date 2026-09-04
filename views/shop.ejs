@@ -1,0 +1,109 @@
+<%- include('partials/header') %>
+
+<section class="container" style="padding-top:48px;">
+  <div class="breadcrumb">
+    <a href="/">Home</a> / Shop
+  </div>
+
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">
+        <%= category ? category : 'All products' %>
+      </div>
+
+      <h1 style="font-size:1.9rem;">
+        <%= query ? `Results for "${query}"` : 'The full catalog' %>
+      </h1>
+    </div>
+  </div>
+
+  <% if (errorMsg) { %>
+    <div class="alert alert-error">
+      We couldn't complete that search.
+      <span class="muted"><%= errorMsg %></span>
+    </div>
+  <% } %>
+
+  <div style="display:flex; gap:10px; margin-bottom:28px; flex-wrap:wrap;">
+
+    <a
+      class="btn btn-small <%= !category ? 'btn-outline' : '' %>"
+      href="/shop"
+    >
+      All
+    </a>
+
+    <% ['Backpacks','Shelter','Home','Footwear','Kitchen','Apparel'].forEach(c => { %>
+
+      <a
+        class="btn btn-small btn-outline"
+        href="/shop?category=<%= c %>"
+      >
+        <%= c %>
+      </a>
+
+    <% }) %>
+
+  </div>
+
+
+  <div class="product-grid">
+
+    <% products.forEach(p => { %>
+
+      <a
+        class="product-card"
+        href="/product/<%= p.slug %>"
+        style="color:inherit;"
+      >
+
+        <div class="thumb" style="overflow:hidden;">
+
+          <img
+            src="<%= p.image %>"
+            alt="<%= p.name %>"
+            style="
+              width:100%;
+              height:100%;
+              display:block;
+              object-fit:cover;
+            "
+          >
+
+        </div>
+
+
+        <div class="body">
+
+          <div class="cat">
+            <%= p.category %>
+          </div>
+
+          <h3>
+            <%= p.name %>
+          </h3>
+
+          <div class="price">
+            $<%= p.price.toFixed(2) %>
+          </div>
+
+        </div>
+
+      </a>
+
+    <% }) %>
+
+  </div>
+
+
+  <% if (products.length === 0 && !errorMsg) { %>
+
+    <p class="muted">
+      No products matched your search.
+    </p>
+
+  <% } %>
+
+</section>
+
+<%- include('partials/footer') %>

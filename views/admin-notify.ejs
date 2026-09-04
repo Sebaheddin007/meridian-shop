@@ -1,0 +1,28 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px; max-width:720px;">
+  <div class="breadcrumb"><a href="/admin">Admin</a> / Notify customer</div>
+  <h1 style="font-size:1.6rem;">Notify customer</h1>
+  <p class="muted">Write a short message template. You can reference the order with <code>{{ order.field }}</code>.</p>
+
+  <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+  <% if (rendered) { %>
+    <div class="alert alert-success">Preview: <%= rendered %></div>
+  <% } %>
+
+  <form action="/admin/notify" method="POST">
+    <div class="field">
+      <label>Order</label>
+      <select name="order_id">
+        <% orders.forEach(o => { %>
+          <option value="<%= o.id %>">Order #<%= o.id %> — $<%= o.total.toFixed(2) %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="field">
+      <label>Message template</label>
+      <textarea name="template" rows="4" placeholder="Hi! Your order total was {{ order.total }} and is now {{ order.status }}."><%= template %></textarea>
+    </div>
+    <button type="submit">Preview message</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

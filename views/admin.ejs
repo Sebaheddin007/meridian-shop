@@ -1,0 +1,63 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px;">
+  <h1 style="font-size:1.7rem;">Admin dashboard</h1>
+  <p class="muted">Internal tools for the Meridian team.</p>
+  <div style="display:flex; gap:10px; margin:16px 0 8px;">
+    <a class="btn btn-small btn-outline" href="/admin/import">Import supplier feed</a>
+    <a class="btn btn-small btn-outline" href="/admin/fetch-image">Fetch product image</a>
+    <a class="btn btn-small btn-outline" href="/admin/notify">Notify customer</a>
+    <a class="btn btn-small btn-outline" href="/admin/diagnostics">Network diagnostics</a>
+  </div>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:24px; align-items:start;">
+    <div class="card">
+      <h3 style="font-size:1.05rem;">Support tickets</h3>
+      <table>
+        <thead><tr><th>#</th><th>Subject</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+        <% tickets.forEach(t => { %>
+          <tr>
+            <td>#<%= t.id %></td>
+            <td><%= t.subject %></td>
+            <td><%= t.status %></td>
+            <td>
+              <% if (t.status !== 'closed') { %>
+                <form action="/admin/tickets/<%= t.id %>/close" method="POST" style="display:inline;">
+                  <button class="btn-small btn-outline" type="submit">Close</button>
+                </form>
+              <% } %>
+            </td>
+          </tr>
+        <% }) %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:1.05rem;">Users</h3>
+      <table>
+        <thead><tr><th>ID</th><th>Username</th><th>Role</th><th></th></tr></thead>
+        <tbody>
+        <% users.forEach(u => { %>
+          <tr>
+            <td><%= u.id %></td>
+            <td><%= u.username %></td>
+            <td><%= u.role %></td>
+            <td>
+              <form action="/admin/users/<%= u.id %>/role" method="POST" style="display:flex; gap:6px;">
+                <select name="role" style="width:auto;">
+                  <option value="customer" <%= u.role==='customer'?'selected':'' %>>customer</option>
+                  <option value="support" <%= u.role==='support'?'selected':'' %>>support</option>
+                  <option value="admin" <%= u.role==='admin'?'selected':'' %>>admin</option>
+                </select>
+                <button class="btn-small btn-outline" type="submit">Set</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>

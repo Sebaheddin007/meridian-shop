@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof title !== 'undefined' ? title + ' — Meridian' : 'Meridian — Outdoor & Home Goods' %></title>
+  <% if (typeof canonicalUrl !== 'undefined') { %><link rel="canonical" href="<%= canonicalUrl %>"><% } %>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/">Meridian<span>.</span></a>
+    <ul class="nav-main">
+      <li><a href="/shop">Shop</a></li>
+      <li><a href="/shop?category=Shelter">Shelter</a></li>
+      <li><a href="/shop?category=Apparel">Apparel</a></li>
+      <li><a href="/journal">Journal</a></li>
+      <li><a href="/support">Support</a></li>
+      <li><a href="/assistant">Assistant</a></li>
+    </ul>
+    <div class="header-actions">
+      <form class="search-box" action="/shop" method="GET">
+        <input type="text" name="q" placeholder="Search products…" value="<%= typeof query !== 'undefined' ? query : '' %>">
+        <button type="submit">Go</button>
+      </form>
+      <% if (user) { %>
+        <a href="/account">My account</a>
+        <% if (user.role === 'admin' || user.role === 'support') { %>
+          <a href="/admin">Admin</a>
+        <% } %>
+        <a href="/logout">Log out</a>
+      <% } else { %>
+        <a href="/login">Log in</a>
+      <% } %>
+      <a href="/cart">Cart (<%= typeof cartCount !== 'undefined' ? cartCount : 0 %>)</a>
+    </div>
+  </div>
+</header>

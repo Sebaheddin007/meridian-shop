@@ -1,0 +1,35 @@
+# Dependencies installed on the host
+node_modules/
+
+# Git metadata
+.git/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE files
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Documentation not required at runtime
+docs/
+README.md
+SOLUTIONS.md
+# Local dev/diagnostic scripts (added by cleanup script)
+*.ps1
+check-tables.js
+diagnostic-output.txt
+cleanup-log.txt
+_archive/

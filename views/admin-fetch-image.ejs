@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px; max-width:720px;">
+  <div class="breadcrumb"><a href="/admin">Admin</a> / Fetch product image</div>
+  <h1 style="font-size:1.6rem;">Fetch product image from URL</h1>
+  <p class="muted">Suppliers sometimes send us a direct link instead of a file. Paste it below and we'll pull it in.</p>
+
+  <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+
+  <form action="/admin/fetch-image" method="POST">
+    <div class="field">
+      <label>Image URL</label>
+      <input type="text" name="url" value="<%= url %>" placeholder="https://supplier.example.com/photo.jpg">
+    </div>
+    <button type="submit">Fetch</button>
+  </form>
+
+  <% if (preview) { %>
+    <h3 style="margin-top:28px; font-size:1rem;">Response preview</h3>
+    <pre style="background:var(--paper-raised); border:1px solid var(--line); padding:16px; border-radius:4px; overflow:auto; font-size:0.8rem; white-space:pre-wrap;"><%= preview %></pre>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

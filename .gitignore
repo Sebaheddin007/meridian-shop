@@ -1,0 +1,13 @@
+node_modules/
+*.log
+
+.env
+.env.*
+!.env.example
+data/*.db
+uploads/*
+_archive/
+cleanup-log.txt
+diagnostic-output.txt
+check-tables.js
+*.ps1

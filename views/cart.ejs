@@ -1,0 +1,60 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px; max-width:720px;">
+  <h1 style="font-size:1.7rem;">Your cart</h1>
+
+  <% if (couponError) { %><div class="alert alert-error"><%= couponError %></div><% } %>
+
+  <% if (items.length === 0) { %>
+    <p class="muted">Your cart is empty. <a href="/shop">Browse the shop</a>.</p>
+  <% } else { %>
+    <table style="margin-top:20px;">
+      <thead><tr><th>Product</th><th>Qty</th><th>Price</th></tr></thead>
+      <tbody>
+      <% items.forEach(i => { %>
+        <tr>
+          <td><a href="/product/<%= i.slug %>"><%= i.name %></a></td>
+          <td>
+            <form action="/cart/update-qty" method="POST" style="display:flex; gap:6px;">
+              <input type="hidden" name="product_id" value="<%= i.id %>">
+              <input type="number" name="qty" value="<%= i.qty %>" style="width:70px;">
+              <button class="btn-small btn-outline" type="submit">Update</button>
+            </form>
+          </td>
+          <td>$<%= (i.price * i.qty).toFixed(2) %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+
+    <div class="card" style="margin-top:24px;">
+      <form action="/cart/coupon" method="POST" style="display:flex; gap:10px; margin-bottom:12px;">
+        <input type="text" name="code" placeholder="Coupon code">
+        <button class="btn-small btn-outline" type="submit">Apply coupon</button>
+      </form>
+      <form action="/cart/giftcard" method="POST" style="display:flex; gap:10px; margin-bottom:18px;">
+        <input type="text" name="code" placeholder="Gift card code">
+        <button class="btn-small btn-outline" type="submit">Apply gift card</button>
+      </form>
+      <% if (couponApplied) { %>
+        <p class="muted">Code <strong><%= couponApplied.code %></strong> applied (-<%= couponApplied.percent_off %>%)</p>
+      <% } %>
+      <% if (giftCardApplied) { %>
+        <p class="muted">Gift card <strong><%= giftCardApplied.code %></strong> applied (-$<%= giftCardApplied.amount.toFixed(2) %>)</p>
+      <% } %>
+      <h3 style="margin-bottom:0;">
+        Total: $<%=
+          (function(){
+            let t = couponApplied ? total * (1 - couponApplied.percent_off/100) : total;
+            if (giftCardApplied) t -= giftCardApplied.amount;
+            return t.toFixed(2);
+          })()
+        %>
+      </h3>
+      <a class="btn" style="margin-top:16px;" href="/checkout">Checkout</a>
+      <div style="margin-top:14px; font-size:0.85rem;">
+        <a href="/cart/export">Save this cart</a> · <a href="/cart/import">Restore a saved cart</a>
+      </div>
+    </div>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

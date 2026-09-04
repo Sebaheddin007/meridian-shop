@@ -1,0 +1,38 @@
+<%- include('partials/header') %>
+<section class="form-page container-narrow">
+  <div class="card">
+    <h1>Log in</h1>
+    <p class="muted" style="margin-top:-8px; margin-bottom:24px;">Welcome back to Meridian.</p>
+
+    <% if (typeof resetSuccess !== 'undefined' && resetSuccess) { %>
+      <div class="alert alert-success">Your password has been updated. You can log in below.</div>
+    <% } %>
+    <% if (error) { %>
+      <div class="alert alert-error"><%= error %></div>
+    <% } %>
+
+    <form action="/login" method="POST">
+      <div class="field">
+        <label>Username</label>
+        <input type="text" name="username" required>
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" name="password" required>
+      </div>
+      <div class="field" style="display:flex; align-items:center; gap:8px;">
+        <input type="checkbox" name="remember_me" id="remember_me" value="1" style="width:auto;">
+        <label for="remember_me" style="margin:0;">Keep me signed in</label>
+      </div>
+      <button type="submit" style="width:100%;">Log in</button>
+    </form>
+    <p class="muted" style="margin-top:18px;">
+      <a href="/forgot-password">Forgot your password?</a> ·
+      <a href="/register">Create an account</a>
+    </p>
+    <div style="border-top:1px solid var(--line); margin-top:20px; padding-top:16px; text-align:center;">
+      <a class="btn btn-outline btn-small" href="/oauth/authorize?client_id=meridian-partner-app&redirect_uri=<%= typeof host !== 'undefined' ? 'http://' + host + '/oauth/callback' : '/oauth/callback' %>&state=<%= Math.random().toString(36).slice(2) %>">Continue with MeridianID</a>
+    </div>
+  </div>
+</section>
+<%- include('partials/footer') %>

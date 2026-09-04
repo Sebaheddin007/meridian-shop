@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<section class="form-page container-narrow">
+  <div class="card">
+    <h1>Contact support</h1>
+    <form action="/support/new" method="POST">
+      <div class="field">
+        <label>Your email</label>
+        <input type="email" name="email" required>
+      </div>
+      <div class="field">
+        <label>Subject</label>
+        <input type="text" name="subject" required>
+      </div>
+      <div class="field">
+        <label>Message</label>
+        <textarea name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" style="width:100%;">Send message</button>
+    </form>
+  </div>
+</section>
+<%- include('partials/footer') %>

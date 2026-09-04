@@ -1,0 +1,12 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px; max-width:640px;">
+  <div class="breadcrumb"><a href="/account">My account</a> / Preferences</div>
+  <h1 style="font-size:1.6rem;">Preferences</h1>
+  <% if (saved) { %><div class="alert alert-success">Preferences saved.</div><% } %>
+  <div class="card">
+    <p class="muted">Current settings (JSON):</p>
+    <pre style="background:var(--paper); padding:14px; border-radius:4px; font-size:0.85rem;"><%= JSON.stringify(settings, null, 2) %></pre>
+    <p class="muted">Advanced users can POST a raw JSON body to this same URL to update nested preferences directly (used by the mobile app).</p>
+  </div>
+</section>
+<%- include('partials/footer') %>

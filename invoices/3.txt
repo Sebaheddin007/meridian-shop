@@ -1,0 +1,5 @@
+MERIDIAN OUTFITTERS CO.
+Invoice #3
+Order Total: $45.00
+Shipping Address: Meridian HQ, 500 Warehouse Way, Portland, OR
+Note: Internal QA test order - restock sample.

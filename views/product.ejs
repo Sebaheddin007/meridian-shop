@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px;">
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/shop">Shop</a> / <%= product.name %></div>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-bottom:56px;">
+    <div class="thumb" style="aspect-ratio:4/3; border-radius:6px; overflow:hidden;">
+      <img
+        src="<%= product.image %>"
+        alt="<%= product.name %>"
+        style="width:100%; height:100%; object-fit:cover; display:block;"
+      >
+    </div>
+    <div>
+      <div class="cat"><%= product.category %></div>
+      <h1><%= product.name %></h1>
+      <div class="price" style="font-size:1.4rem; margin-bottom:18px;">$<%= product.price.toFixed(2) %></div>
+      <p><%= product.description %></p>
+      <p class="muted"><%= product.stock %> in stock</p>
+      <form action="/cart/add" method="POST" style="margin-top:20px; display:flex; gap:10px; align-items:end;">
+        <input type="hidden" name="product_id" value="<%= product.id %>">
+        <div class="field" style="max-width:100px; margin-bottom:0;">
+          <label>Qty</label>
+          <input type="number" name="qty" value="1" min="1">
+        </div>
+        <button type="submit">Add to cart</button>
+      </form>
+    </div>
+  </div>
+  <div style="max-width:640px;">
+    <h2 style="font-size:1.3rem;">Reviews (<%= reviews.length %>)</h2>
+    <% if (submitted) { %>
+      <div class="alert alert-success">Thanks — your review has been posted.</div>
+    <% } %>
+    <% reviews.forEach(r => { %>
+      <div class="review">
+        <div class="author"><%= r.author %></div>
+        <div class="stars"><%= '★'.repeat(r.rating) %><%= '☆'.repeat(5 - r.rating) %></div>
+        <div class="body"><%- r.body %></div>
+      </div>
+    <% }) %>
+    <h3 style="margin-top:36px; font-size:1.05rem;">Write a review</h3>
+    <form action="/product/<%= product.slug %>/review" method="POST">
+      <div class="field">
+        <label>Name</label>
+        <input type="text" name="author" value="<%= user ? user.display_name : '' %>" required>
+      </div>
+      <div class="field">
+        <label>Rating</label>
+        <select name="rating">
+          <option value="5">5 - Excellent</option>
+          <option value="4">4 - Good</option>
+          <option value="3">3 - Average</option>
+          <option value="2">2 - Poor</option>
+          <option value="1">1 - Bad</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Review</label>
+        <textarea name="body" rows="4" required></textarea>
+      </div>
+      <button type="submit">Post review</button>
+    </form>
+  </div>
+</section>
+<%- include('partials/footer') %>

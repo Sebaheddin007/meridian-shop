@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<section class="form-page container-narrow">
+  <div class="card">
+    <h1 style="font-size:1.4rem;">Restore a saved cart</h1>
+    <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+    <form action="/cart/import" method="POST">
+      <div class="field">
+        <label>Cart code</label>
+        <textarea name="code" rows="4" style="font-family:monospace; font-size:0.8rem;" required></textarea>
+      </div>
+      <button type="submit" style="width:100%;">Restore</button>
+    </form>
+  </div>
+</section>
+<%- include('partials/footer') %>

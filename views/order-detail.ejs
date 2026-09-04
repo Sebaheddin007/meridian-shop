@@ -1,0 +1,15 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px; max-width:640px;">
+  <div class="breadcrumb"><a href="/account">My account</a> / Order #<%= order.id %></div>
+  <h1 style="font-size:1.6rem;">Order #<%= order.id %></h1>
+  <div class="card" style="margin-top:20px;">
+    <p><span class="badge badge-<%= order.status %>"><%= order.status %></span></p>
+    <table style="margin-top:14px;">
+      <tr><th>Total</th><td>$<%= order.total.toFixed(2) %></td></tr>
+      <tr><th>Shipping address</th><td><%= order.shipping_address %></td></tr>
+      <tr><th>Placed</th><td><%= order.created_at %></td></tr>
+    </table>
+    <a class="btn btn-small btn-outline" style="margin-top:20px;" href="/account/orders/<%= order.id %>/invoice">Download invoice</a>
+  </div>
+</section>
+<%- include('partials/footer') %>

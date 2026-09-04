@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px; max-width:720px;">
+  <div class="breadcrumb"><a href="/admin">Admin</a> / Import supplier feed</div>
+  <h1 style="font-size:1.6rem;">Import supplier stock feed</h1>
+  <p class="muted">Paste the XML feed sent by a supplier to update stock levels.</p>
+
+  <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+  <% if (result) { %>
+    <div class="alert alert-success">
+      Parsed: <strong><%= result.name %></strong> — SKU <%= result.sku %>, qty <%= result.quantity %>
+    </div>
+  <% } %>
+
+  <form action="/admin/import" method="POST">
+    <div class="field">
+      <label>XML feed</label>
+      <textarea name="xml" rows="10" style="font-family:monospace; font-size:0.85rem;"><?xml version="1.0"?>
+<supplier>
+  <name>Coastal Canvas Co.</name>
+  <sku>CC-1182</sku>
+  <quantity>120</quantity>
+</supplier></textarea>
+    </div>
+    <button type="submit">Import feed</button>
+  </form>
+</section>
+<%- include('partials/footer') %>

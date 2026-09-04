@@ -1,0 +1,22 @@
+<%- include('partials/header') %>
+<section class="container" style="padding-top:48px; padding-bottom:80px; max-width:720px;">
+  <div class="breadcrumb"><a href="/admin">Admin</a> / Network diagnostics</div>
+  <h1 style="font-size:1.6rem;">Network diagnostics</h1>
+  <p class="muted">Check whether a supplier's server is reachable before running an import job.</p>
+
+  <% if (error) { %><div class="alert alert-error"><%= error %></div><% } %>
+
+  <form action="/admin/diagnostics" method="POST">
+    <div class="field">
+      <label>Hostname</label>
+      <input type="text" name="host" value="<%= host %>" placeholder="supplier.example.com">
+    </div>
+    <button type="submit">Ping</button>
+  </form>
+
+  <% if (output) { %>
+    <h3 style="margin-top:24px; font-size:1rem;">Output</h3>
+    <pre style="background:var(--paper-raised); border:1px solid var(--line); padding:16px; border-radius:4px; overflow:auto; font-size:0.8rem; white-space:pre-wrap;"><%= output %></pre>
+  <% } %>
+</section>
+<%- include('partials/footer') %>
