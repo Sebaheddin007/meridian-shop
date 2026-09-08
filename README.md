@@ -63,7 +63,7 @@ stuck.
 ## Quick start (Docker — recommended)
 
 ```bash
-git clone https://github.com/<your-username>/meridian-shop.git
+git clone https://github.com/Sebaheddin007/meridian-shop.git
 cd meridian-shop
 docker build -t meridian-shop:latest .
 docker run -d --name meridian-shop -p 3000:3000 meridian-shop:latest
