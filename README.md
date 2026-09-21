@@ -9,7 +9,7 @@
 
 ---
 
-## ⚠️ Warning — Read Before Running
+ Read Before Running
 
 **This application contains deliberately introduced, exploitable security
 vulnerabilities. Do not deploy it on a public server, a shared network, or
