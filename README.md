@@ -45,14 +45,11 @@ by reading responses, probing inputs, and reading the source when you get
 stuck.
 
 ## Who is this for?
-
 - Students learning web application security
 - Developers who want to see real vulnerability patterns in realistic code
-- Anyone practicing for OSCP / eJPT / eWPT-style web app sections
 - Instructors who want a self-hostable lab environment
 
 ## Tech stack
-
 - Node.js + Express
 - EJS templating
 - `better-sqlite3` (file-based SQLite database)
